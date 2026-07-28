@@ -39,6 +39,18 @@ signup — no backend required.
 3. Build settings — leave **Framework preset** as *None*, **Build command**
    empty, and **Build output directory** as `/`. It's static, so there's nothing
    to build.
-4. Deploy. Then, under the project's **Custom domains** tab, add
-   `viviansoderberg.com`. Since the domain's DNS is already in Cloudflare, the
-   DNS record is created for you automatically.
+4. Deploy. You'll get a `*.pages.dev` URL immediately.
+
+### 3. Point the domain (DNS is at GoDaddy)
+
+In the Pages project's **Custom domains** tab, add `viviansoderberg.com`.
+Cloudflare will show a target hostname. Because DNS lives at GoDaddy (not
+Cloudflare), pick one:
+
+- **Recommended — move DNS to Cloudflare.** Add the domain in Cloudflare, then
+  at GoDaddy change the nameservers to the two Cloudflare gives you. After it
+  propagates, the apex + `www` custom domain works automatically with SSL.
+- **Keep DNS at GoDaddy.** GoDaddy can't CNAME the apex, so at GoDaddy add a
+  `CNAME` record for `www` → the `*.pages.dev` host, add `www.viviansoderberg.com`
+  as the Pages custom domain, and use GoDaddy **Forwarding** to send the root
+  `viviansoderberg.com` → `https://www.viviansoderberg.com`.
