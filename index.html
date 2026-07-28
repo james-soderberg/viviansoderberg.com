@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Vivian Soderberg</title>
+  <meta name="description" content="Vivian Soderberg — the website is getting a facelift. Join the mailing list to be the first to know when a new collection drops." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Vivian Soderberg" />
+  <meta property="og:description" content="The website is getting a facelift. Join the mailing list to be the first to know when a new collection drops." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://viviansoderberg.com/" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+
+  <!-- Cormorant Garamond 500 (heading) + Inter 400/500 (body, fields, button). Only the weights used are requested. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="stage">
+    <div class="card" id="card">
+      <h1 class="heading">Website is getting a facelift.</h1>
+      <p class="subheading">Be the first to know when a new collection drops by joining my mailing list.</p>
+
+      <form class="form" id="signup" novalidate>
+        <!--
+          Web3Forms access key.
+          REPLACE "YOUR_ACCESS_KEY_HERE" with the key from https://web3forms.com
+          (see README, step 1). The key is safe to expose in client-side code.
+        -->
+        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+
+        <!-- Honeypot: hidden from real users; bots that fill it get silently rejected. -->
+        <input type="text" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" />
+          <span class="field-error" id="name-error" aria-live="polite"></span>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" inputmode="email" />
+          <span class="field-error" id="email-error" aria-live="polite"></span>
+        </div>
+
+        <button type="submit" class="submit" id="submit">Join the list</button>
+        <p class="form-error" id="form-error" role="alert"></p>
+      </form>
+    </div>
+  </main>
+
+  <script>
+  (function () {
+    "use strict";
+
+    var form = document.getElementById("signup");
+    var submit = document.getElementById("submit");
+    var formError = document.getElementById("form-error");
+
+    var nameInput = document.getElementById("name");
+    var emailInput = document.getElementById("email");
+
+    var fields = {
+      name: {
+        input: nameInput,
+        wrap: nameInput.closest(".field"),
+        error: document.getElementById("name-error"),
+      },
+      email: {
+        input: emailInput,
+        wrap: emailInput.closest(".field"),
+        error: document.getElementById("email-error"),
+      },
+    };
+
+    // Basic, permissive email format check — something@something.tld
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function setFieldError(key, message) {
+      var f = fields[key];
+      f.error.textContent = message || "";
+      f.wrap.classList.toggle("invalid", Boolean(message));
+    }
+
+    function validate() {
+      var ok = true;
+
+      if (!nameInput.value.trim()) {
+        setFieldError("name", "Please enter your name.");
+        ok = false;
+      } else {
+        setFieldError("name", "");
+      }
+
+      var email = emailInput.value.trim();
+      if (!email) {
+        setFieldError("email", "Please enter your email.");
+        ok = false;
+      } else if (!EMAIL_RE.test(email)) {
+        setFieldError("email", "Please enter a valid email address.");
+        ok = false;
+      } else {
+        setFieldError("email", "");
+      }
+
+      return ok;
+    }
+
+    // Clear a field's error as soon as the user starts correcting it.
+    [nameInput, emailInput].forEach(function (input) {
+      input.addEventListener("input", function () {
+        var key = input === nameInput ? "name" : "email";
+        if (fields[key].wrap.classList.contains("invalid")) {
+          setFieldError(key, "");
+        }
+      });
+    });
+
+    function setPending(isPending) {
+      submit.disabled = isPending;
+      submit.classList.toggle("pending", isPending);
+      submit.textContent = isPending ? "Sending…" : "Join the list";
+    }
+
+    function showConfirmation() {
+      var msg = document.createElement("p");
+      msg.className = "confirmation";
+      msg.textContent = "Thank you — you’re on the list.";
+      form.replaceWith(msg);
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      formError.textContent = "";
+
+      if (!validate()) return;
+
+      setPending(true);
+
+      var data = new FormData(form);
+
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
+      })
+        .then(function (response) {
+          return response.json().then(function (json) {
+            return { ok: response.ok, json: json };
+          });
+        })
+        .then(function (result) {
+          if (result.ok && result.json.success) {
+            showConfirmation();
+          } else {
+            throw new Error(
+              (result.json && result.json.message) || "Submission failed"
+            );
+          }
+        })
+        .catch(function () {
+          // Keep the entered values; just surface an inline error.
+          setPending(false);
+          formError.textContent =
+            "Something went wrong. Please try again in a moment.";
+        });
+    });
+  })();
+  </script>
+</body>
+</html>
