@@ -107,6 +107,23 @@
     transition:background .45s,color .45s,border-color .45s;
   }
   .send:hover{background:var(--tan);border-color:var(--tan);color:#eae7e1}
+  .sent{margin-top:28px;padding:20px 22px;border:1px solid rgba(70,63,56,.25)}
+  .sent p{font-size:16.5px;line-height:1.7;margin:0 0 6px;color:var(--ink)}
+  .sent .fallback{font-size:15px;color:var(--ink-soft);margin:0 0 14px}
+  .sent textarea{
+    width:100%;min-height:150px;resize:vertical;
+    font-family:var(--serif);font-size:16px;line-height:1.65;color:var(--ink);
+    background:none;border:0;border-top:1px solid rgba(70,63,56,.2);
+    padding:14px 0 0;margin-bottom:14px;
+  }
+  .sent textarea:focus{outline:none}
+  .sent .copy{
+    background:none;cursor:pointer;font-family:var(--serif);
+    font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;
+    color:var(--tan);padding:11px 26px;border:1px solid rgba(100,76,44,.45);
+    transition:background .4s,color .4s,border-color .4s;
+  }
+  .sent .copy:hover{background:var(--tan);border-color:var(--tan);color:#eae7e1}
   .thanks{font-size:19px;line-height:1.7;margin:0;max-width:38ch}
   .thanks a{color:var(--ink);text-decoration:none;border-bottom:1px solid rgba(70,63,56,.3)}
   .thanks a:hover{color:var(--tan);border-bottom-color:var(--tan)}
@@ -229,22 +246,61 @@
     var body=msg.value.trim();
     if(!name && !from && !body) return;
 
-    var subject=piece ? 'Purchase inquiry \u2014 '+piece : 'Commission inquiry';
+    var subject=piece ? 'Purchase inquiry — '+piece : 'Commission inquiry';
     var lines=[];
     if(name) lines.push('Name: '+name);
     if(from) lines.push('Email: '+from);
     if(lines.length) lines.push('');
     if(body) lines.push(body);
+    var text=lines.join('\n');
 
-    var href='mailto:'+TO+'?subject='+encodeURIComponent(subject)
-             +'&body='+encodeURIComponent(lines.join('\n'));
-    window.location.href=href;
+    window.location.href='mailto:'+TO+'?subject='+encodeURIComponent(subject)
+      +'&body='+encodeURIComponent(text);
 
-    var p=document.createElement('p');
-    p.className='thanks';
-    p.innerHTML='Your email app should be opening. If nothing happens, write to '
-      +'<a href="mailto:'+TO+'">'+TO+'</a>.';
-    f.replaceWith(p);
+    // The form is deliberately left filled in: mailto: fails silently when the
+    // browser has no mail handler, and retyping everything would be the worst
+    // possible outcome. Show the composed message so it can just be copied.
+    var old=document.getElementById('sent');
+    if(old) old.remove();
+
+    var box=document.createElement('div');
+    box.className='sent';
+    box.id='sent';
+
+    var p1=document.createElement('p');
+    p1.textContent='Your email app should be opening.';
+
+    var p2=document.createElement('p');
+    p2.className='fallback';
+    p2.innerHTML='If it didn’t, copy this and send it to '
+      +'<a href="mailto:'+TO+'">'+TO+'</a> — nothing you typed is lost.';
+
+    var ta=document.createElement('textarea');
+    ta.readOnly=true;
+    ta.value='Subject: '+subject+'\n\n'+text;
+
+    var btn=document.createElement('button');
+    btn.type='button';
+    btn.className='copy';
+    btn.textContent='Copy message';
+    btn.addEventListener('click',function(){
+      ta.select();
+      var done=false;
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(ta.value).then(function(){
+          btn.textContent='Copied';
+        },function(){});
+        done=true;
+      }
+      if(!done){
+        try{ document.execCommand('copy'); btn.textContent='Copied'; }catch(err){}
+      }
+    });
+
+    box.appendChild(p1); box.appendChild(p2);
+    box.appendChild(ta); box.appendChild(btn);
+    f.parentNode.insertBefore(box, f.nextSibling);
+    box.scrollIntoView({behavior:'smooth',block:'nearest'});
   });
 })();
 </script>
