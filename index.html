@@ -1,179 +1,510 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vivian's Place</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<meta name="description" content="Original oil and acrylic paintings and fine art prints by Vivian Soderberg. Simple, thoughtful work that gives you a sense of place." />
+<meta property="og:title" content="Vivian’s Place — Vivian Soderberg" />
+<meta property="og:description" content="Art that holds a memory. Original paintings and fine art prints." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://viviansoderberg.com/" />
+<meta property="og:image" content="https://viviansoderberg.com/images/memories-home.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#463f38;
+    --ink-soft:#554d45;
+    --ink-quiet:#554e44;
+    --tan:#644c2c;
+    --cloud:#dedcd7;
+    --haze:#e4e2dd;
+    --sand:#ded2c0;
+    --rule:rgba(70,63,56,.2);
+    --hair:rgba(70,63,56,.12);
+    --serif:"Cormorant Garamond",Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;color:var(--ink);
+    font-family:var(--serif);font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    background:linear-gradient(180deg,
+      #d3d1cb 0%, #d8d6d0 24%, #d9d7d1 48%, #d6cfc3 72%, #d0c2ae 100%) no-repeat;
+    background-size:100% 100%;
+  }
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,56px)}
+  .caps{font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:500}
 
-  <title>Vivian Soderberg</title>
-  <meta name="description" content="Vivian Soderberg — the website is getting a facelift. Join the mailing list to be the first to know when a new collection drops." />
+  /* ---------- header ---------- */
+  header{padding:clamp(20px,3vw,32px) 0 0}
+  .head-row{
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;
+  }
+  .cart{
+    justify-self:end;display:inline-flex;align-items:center;gap:8px;
+    text-decoration:none;color:var(--ink);padding:6px 2px;
+    transition:color .35s;
+  }
+  .cart:hover{color:var(--tan)}
+  .cart svg{width:22px;height:22px;display:block}
+  .cart .count{
+    font-size:12px;letter-spacing:.16em;color:var(--ink-quiet);
+  }
+  .shopname{
+    justify-self:center;text-decoration:none;
+    font-weight:300;font-size:clamp(23px,3.1vw,38px);
+    line-height:1.05;letter-spacing:.03em;white-space:nowrap;
+  }
+  .head-spacer{justify-self:start}
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Vivian Soderberg" />
-  <meta property="og:description" content="The website is getting a facelift. Join the mailing list to be the first to know when a new collection drops." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://viviansoderberg.com/" />
+  .menu{
+    display:flex;justify-content:center;gap:clamp(18px,3.4vw,52px);flex-wrap:wrap;
+    margin-top:clamp(16px,2.4vw,26px);
+    padding-bottom:clamp(16px,2.4vw,24px);
+    border-bottom:1px solid var(--hair);
+  }
+  .menu a{
+    text-decoration:none;color:var(--ink-soft);
+    font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+    padding-bottom:3px;border-bottom:1px solid transparent;
+    transition:color .35s,border-color .35s;
+  }
+  .menu a:hover{color:var(--tan);border-bottom-color:var(--tan)}
 
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  /* ---------- hero painting ---------- */
+  .hero{
+    position:relative;margin-top:clamp(22px,3.4vw,40px);
+    height:clamp(340px,64vh,620px);overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hero img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:50% 42%;
+    transform:scale(1.12);  /* crops the wooden frame out of shot */
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 86% 72% at 50% 50%,
+        rgba(214,222,209,.59) 0%,
+        rgba(214,222,209,.57) 55%,
+        rgba(210,218,206,.30) 85%,
+        rgba(210,218,206,.13) 100%);
+  }
+  .hero h1{
+    position:relative;z-index:2;margin:0;padding:0 24px;
+    font-weight:300;font-style:italic;
+    font-size:clamp(27px,4.4vw,58px);line-height:1.16;
+    letter-spacing:.01em;text-align:center;text-wrap:balance;
+    color:var(--ink);
+    text-shadow:0 1px 18px rgba(219,226,214,.88), 0 0 40px rgba(219,226,214,.62);
+  }
 
-  <!-- Cormorant Garamond 500 (heading) + Inter 400/500 (body, fields, button). Only the weights used are requested. -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  /* ---------- section heads ---------- */
+  .sec{padding:clamp(54px,8vw,110px) 0 0}
+  .sec-head{text-align:center;margin-bottom:clamp(32px,4.6vw,58px)}
+  .sec-head h2{
+    font-weight:400;font-size:clamp(26px,3.4vw,44px);
+    margin:0 0 16px;letter-spacing:.02em;
+  }
+  .showall{
+    display:inline-block;text-decoration:none;color:var(--tan);
+    background:none;font-family:var(--serif);cursor:pointer;
+    font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;
+    padding:8px 20px;border:1px solid rgba(100,76,44,.4);
+    transition:background .4s,color .4s,border-color .4s;
+  }
+  .showall:hover{background:var(--tan);border-color:var(--tan);color:#eae7e1}
 
-  <link rel="stylesheet" href="styles.css" />
+  /* ---------- three-up rows ---------- */
+  .three{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:clamp(22px,3.6vw,56px);
+  }
+  .card{margin:0;display:flex;flex-direction:column;text-align:center}
+  .card .box{
+    aspect-ratio:1;overflow:hidden;position:relative;display:block;
+  }
+  .card .size{
+    position:absolute;left:50%;bottom:14px;transform:translate(-50%,6px);
+    font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--ink);background:rgba(226,229,221,.9);
+    padding:7px 16px;white-space:nowrap;
+    opacity:0;transition:opacity .4s,transform .4s;pointer-events:none;
+  }
+  .card:hover .size,.card .box:focus-visible .size{opacity:1;transform:translate(-50%,0)}
+  .card img{
+    width:100%;height:100%;object-fit:cover;
+    box-shadow:0 28px 54px -34px rgba(70,63,56,.5);
+    transition:transform .9s cubic-bezier(.2,.7,.3,1),box-shadow .9s;
+  }
+  .card:hover img{transform:translateY(-5px);box-shadow:0 40px 66px -36px rgba(70,63,56,.56)}
+  .card figcaption{padding-top:clamp(16px,2.2vw,24px)}
+  .card .t{
+    display:block;text-decoration:none;font-size:clamp(20px,1.9vw,26px);line-height:1.24;margin-bottom:7px;
+  }
+  .card .price{display:block;font-size:20px;letter-spacing:.02em;margin-bottom:16px}
+  .card .price .sold{
+    color:var(--ink-quiet);font-size:11px;letter-spacing:.24em;
+    text-transform:uppercase;margin-left:8px;
+  }
+  .buy{
+    display:inline-block;text-decoration:none;color:var(--tan);
+    font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;
+    padding:12px 28px;border:1px solid rgba(100,76,44,.45);
+    transition:background .45s,color .45s,border-color .45s;
+  }
+  .buy:hover{background:var(--tan);border-color:var(--tan);color:#eae7e1}
+  .card .box.empty{
+    display:flex;align-items:center;justify-content:center;
+    border:1px dashed rgba(70,63,56,.28);
+  }
+  .card .box.empty span{
+    font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-quiet);
+  }
+  .soldout{
+    display:inline-block;font-size:11px;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--ink-quiet);padding:12px 28px;border:1px solid var(--hair);
+  }
+
+  /* ---------- about ---------- */
+  .more{display:none;margin-top:clamp(22px,3.6vw,56px)}
+  .more.open{display:grid}
+
+  .about{padding:clamp(44px,6.5vw,92px) 0 clamp(28px,4vw,56px)}
+  .about .wrap{
+    max-width:1020px;
+    display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);
+    gap:clamp(24px,3.6vw,56px);align-items:center;
+  }
+  .about img{
+    width:100%;height:auto;max-width:340px;justify-self:center;
+    box-shadow:0 26px 50px -36px rgba(70,63,56,.5);
+  }
+  .about p{
+    font-size:clamp(15.5px,1.15vw,17.5px);line-height:1.85;color:var(--ink-soft);
+    margin:0 0 17px;max-width:52ch;
+  }
+  .about p.first{
+    font-size:clamp(18px,1.7vw,23px);line-height:1.5;color:var(--ink);
+    font-weight:300;
+  }
+  .about p:last-child{margin-bottom:0}
+
+  /* ---------- inquiries ---------- */
+  .inq{text-align:center;padding:clamp(40px,6vw,80px) 0 clamp(34px,5vw,62px)}
+  .inq h2{font-weight:400;font-size:clamp(24px,3vw,36px);margin:0 0 14px;letter-spacing:.02em}
+  .inq .lead{font-size:17px;line-height:1.85;color:var(--ink-soft);max-width:40ch;margin:0 auto 28px}
+  .subscribe{
+    display:inline-block;text-decoration:none;color:var(--tan);
+    font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:500;
+    padding:15px 40px;border:1px solid rgba(100,76,44,.45);
+    transition:background .45s,color .45s,border-color .45s;
+  }
+  .subscribe:hover{background:var(--tan);border-color:var(--tan);color:#eae7e1}
+  .direct{font-size:16px;color:var(--ink-soft);margin:24px 0 0}
+  .direct a{color:var(--ink);text-decoration:none;border-bottom:1px solid rgba(70,63,56,.3);padding-bottom:2px}
+  .direct a:hover{color:var(--tan);border-bottom-color:var(--tan)}
+
+  footer{border-top:1px solid var(--hair)}
+  footer .wrap{
+    display:flex;justify-content:center;gap:clamp(18px,3vw,40px);flex-wrap:wrap;
+    padding-top:24px;padding-bottom:32px;color:var(--ink-quiet);
+  }
+  footer a{text-decoration:none}
+  footer a:hover{color:var(--tan)}
+
+  @media(max-width:860px){
+    .about .wrap{grid-template-columns:1fr;gap:32px}
+  }
+  @media(max-width:680px){
+    .three{grid-template-columns:1fr;gap:44px}
+    .card .box{aspect-ratio:4/3}
+    .menu{gap:14px}
+    .menu a{font-size:11px;letter-spacing:.14em}
+    .shopname{font-size:clamp(26px,7vw,38px)}
+  }
+</style>
 </head>
 <body>
-  <main class="stage">
-    <div class="card" id="card">
-      <h1 class="heading">Website is getting a facelift.</h1>
-      <p class="subheading">Be the first to know when a new collection drops by joining my mailing list.</p>
 
-      <form class="form" id="signup" novalidate>
-        <!--
-          Web3Forms access key.
-          REPLACE "YOUR_ACCESS_KEY_HERE" with the key from https://web3forms.com
-          (see README, step 1). The key is safe to expose in client-side code.
-        -->
-        <input type="hidden" name="access_key" value="ad91d217-d49f-4554-8f15-873c155dfbe6" />
+<header>
+  <div class="wrap">
+    <div class="head-row">
+      <span class="head-spacer"></span>
 
-        <!-- Honeypot: hidden from real users; bots that fill it get silently rejected. -->
-        <input type="text" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <a class="shopname" href="#">Vivian's Place</a>
 
-        <div class="field">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" autocomplete="name" />
-          <span class="field-error" id="name-error" aria-live="polite"></span>
-        </div>
-
-        <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" autocomplete="email" inputmode="email" />
-          <span class="field-error" id="email-error" aria-live="polite"></span>
-        </div>
-
-        <button type="submit" class="submit" id="submit">Join the list</button>
-        <p class="form-error" id="form-error" role="alert"></p>
-      </form>
+      <!-- cart: no live basket yet — Square payment links check out one piece at a time -->
+      <a class="cart" href="inquiries.html" aria-label="Shopping cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M1.6 2.2h2.6l2.1 11.2a1.7 1.7 0 0 0 1.7 1.4h8.6a1.7 1.7 0 0 0 1.7-1.35l1.5-7.15H4.9" />
+          <circle cx="9.2" cy="20.1" r="1.5" />
+          <circle cx="17.6" cy="20.1" r="1.5" />
+        </svg>
+        <span class="count">0</span>
+      </a>
     </div>
-  </main>
 
-  <script>
-  (function () {
-    "use strict";
+    <nav class="menu">
+      <a href="#originals">Original Works</a>
+      <a href="#prints">Fine Art Prints</a>
+      <a href="#objects">Objects</a>
+      <a href="inquiries.html">Inquiries</a>
+    </nav>
+  </div>
+</header>
 
-    var form = document.getElementById("signup");
-    var submit = document.getElementById("submit");
-    var formError = document.getElementById("form-error");
+<section class="hero">
+  <img src="images/memories-home.jpg" alt="Memories Home — a dark treeline and still water beneath a pale clouded sky" width="2000" height="1381" />
+  <h1>Art that holds a memory</h1>
+</section>
 
-    var nameInput = document.getElementById("name");
-    var emailInput = document.getElementById("email");
+<main>
 
-    var fields = {
-      name: {
-        input: nameInput,
-        wrap: nameInput.closest(".field"),
-        error: document.getElementById("name-error"),
-      },
-      email: {
-        input: emailInput,
-        wrap: emailInput.closest(".field"),
-        error: document.getElementById("email-error"),
-      },
-    };
+  <!-- ============ ORIGINALS ============ -->
+  <section class="sec" id="originals">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Originals</h2>
+        <button class="showall" type="button" id="showall" aria-expanded="false" aria-controls="more">Show all</button>
+      </div>
 
-    // Basic, permissive email format check — something@something.tld
-    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      <!--
+        Purchase currently routes to the inquiries form, carrying the piece
+        name in ?piece= so the message arrives pre-filled.
 
-    function setFieldError(key, message) {
-      var f = fields[key];
-      f.error.textContent = message || "";
-      f.wrap.classList.toggle("invalid", Boolean(message));
-    }
+        TO SWITCH TO SQUARE LATER: create each item in Square with stock
+        tracking set to 1, generate a payment link, and replace this button's
+        href="inquiries.html?piece=..." with that URL. The label
+        "Email to purchase" should then go back to "Add to cart".
+      -->
+      <div class="three">
 
-    function validate() {
-      var ok = true;
+        <figure class="card">
+          <a class="box" href="the-valley-over.html">
+            <img src="images/the-valley-over.jpg" alt="The Valley Over — dark massed trees rising beneath a heavy grey sky" loading="lazy" />
+            <span class="size">20 &times; 24 in</span>
+          </a>
+          <figcaption>
+            <a class="t" href="the-valley-over.html">The Valley Over</a>
+            <span class="price">$480</span>
+            <a class="buy" href="inquiries.html?piece=The%20Valley%20Over">Email to purchase</a>
+          </figcaption>
+        </figure>
+        <figure class="card">
+          <a class="box" href="once.html">
+            <img src="images/once.jpg" alt="Once — a misty green-grey landscape of trees along a slow stream" loading="lazy" />
+            <span class="size">30 &times; 40 in</span>
+          </a>
+          <figcaption>
+            <a class="t" href="once.html">Once</a>
+            <span class="price">$1200 <span class="sold">Sold</span></span>
+            <span class="soldout">Sold</span>
+          </figcaption>
+        </figure>
+        <figure class="card">
+          <a class="box" href="the-unknown.html">
+            <img src="images/the-unknown.jpg" alt="The Unknown — a dark stand of trees at the edge of open ground under a luminous clouded sky" loading="lazy" />
+            <span class="size">26 &times; 36 in</span>
+          </a>
+          <figcaption>
+            <a class="t" href="the-unknown.html">The Unknown</a>
+            <span class="price">$936</span>
+            <a class="buy" href="inquiries.html?piece=The%20Unknown">Email to purchase</a>
+          </figcaption>
+        </figure>
 
-      if (!nameInput.value.trim()) {
-        setFieldError("name", "Please enter your name.");
-        ok = false;
-      } else {
-        setFieldError("name", "");
-      }
+      </div>
 
-      var email = emailInput.value.trim();
-      if (!email) {
-        setFieldError("email", "Please enter your email.");
-        ok = false;
-      } else if (!EMAIL_RE.test(email)) {
-        setFieldError("email", "Please enter a valid email address.");
-        ok = false;
-      } else {
-        setFieldError("email", "");
-      }
+      <div class="three more" id="more">
+        <figure class="card">
+          <a class="box" href="memories-home.html">
+            <img src="images/memories-home.jpg" alt="Memories Home — a dark treeline and still water beneath a pale clouded sky" loading="lazy" />
+          </a>
+          <figcaption>
+            <a class="t" href="memories-home.html">Memories Home</a>
+            <span class="price">$720 <span class="sold">Sold</span></span>
+            <span class="soldout">Sold</span>
+          </figcaption>
+        </figure>
+        <figure class="card">
+          <a class="box" href="somewhere-i-know.html">
+            <img src="images/somewhere-i-know.jpg" alt="Somewhere I Know — a lone tree beside a river running through open hills" loading="lazy" />
+          </a>
+          <figcaption>
+            <a class="t" href="somewhere-i-know.html">Somewhere I Know</a>
+            <span class="price">$720 <span class="sold">Sold</span></span>
+            <span class="soldout">Sold</span>
+          </figcaption>
+        </figure>
+        <figure class="card">
+          <a class="box" href="going.html">
+            <img src="images/going.jpg" alt="Going — two geese in flight over a wide sand-coloured sky and dark shore" loading="lazy" />
+          </a>
+          <figcaption>
+            <a class="t" href="going.html">Going</a>
+            <span class="price">$520 <span class="sold">Sold</span></span>
+            <span class="soldout">Sold</span>
+          </figcaption>
+        </figure>
+        <figure class="card">
+          <a class="box" href="one-summer.html">
+            <img src="images/one-summer.jpg" alt="One Summer — a golden ochre field beneath a heavy storm sky" loading="lazy" />
+          </a>
+          <figcaption>
+            <a class="t" href="one-summer.html">One Summer</a>
+            <span class="price">$480 <span class="sold">Sold</span></span>
+            <span class="soldout">Sold</span>
+          </figcaption>
+        </figure>
+        <figure class="card">
+          <a class="box" href="between-dreams.html">
+            <img src="images/between-dreams.jpg" alt="Between Dreams — a misty marsh with pale water and grey-green trees" loading="lazy" />
+          </a>
+          <figcaption>
+            <a class="t" href="between-dreams.html">Between Dreams</a>
+            <span class="price">$320 <span class="sold">Sold</span></span>
+            <span class="soldout">Sold</span>
+          </figcaption>
+        </figure>
+        <figure class="card">
+          <a class="box" href="poppies-at-dusk.html">
+            <img src="images/poppies-at-dusk.jpg" alt="Poppies at Dusk — red poppies against a deep slate-green ground" loading="lazy" />
+          </a>
+          <figcaption>
+            <a class="t" href="poppies-at-dusk.html">Poppies at Dusk</a>
+            <span class="price">$152 <span class="sold">Sold</span></span>
+            <span class="soldout">Sold</span>
+          </figcaption>
+        </figure>
+        <figure class="card">
+          <a class="box" href="almost.html">
+            <img src="images/almost.jpg" alt="Almost — yellow pears heaped in a pale grey-blue bowl" loading="lazy" />
+          </a>
+          <figcaption>
+            <a class="t" href="almost.html">Almost</a>
+            <span class="price">$152 <span class="sold">Sold</span></span>
+            <span class="soldout">Sold</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
 
-      return ok;
-    }
+  <!-- ============ FINE ART PRINTS ============ -->
+  <section class="sec" id="prints">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Fine Art Prints</h2>
+        <a class="showall" href="#prints">Show all</a>
+      </div>
 
-    // Clear a field's error as soon as the user starts correcting it.
-    [nameInput, emailInput].forEach(function (input) {
-      input.addEventListener("input", function () {
-        var key = input === nameInput ? "name" : "email";
-        if (fields[key].wrap.classList.contains("invalid")) {
-          setFieldError(key, "");
-        }
-      });
-    });
+      <div class="three">
 
-    function setPending(isPending) {
-      submit.disabled = isPending;
-      submit.classList.toggle("pending", isPending);
-      submit.textContent = isPending ? "Sending…" : "Join the list";
-    }
+        <figure class="card">
+          <a class="box" href="print-lilacs.html">
+            <img src="images/lilacs-held.jpg" alt="Lilacs — purple lilac spikes and white umbels rising through a soft grey field, held against a pale wall" loading="lazy" />
+            <span class="size">11 &times; 14 in</span>
+          </a>
+          <figcaption>
+            <a class="t" href="print-lilacs.html">Lilacs</a>
+            <span class="price">$40</span>
+            <a class="buy" href="inquiries.html?piece=Lilacs%20%28print%29">Email to purchase</a>
+          </figcaption>
+        </figure>
+        <figure class="card">
+          <a class="box" href="print-poppies.html">
+            <img src="images/poppies-held.jpg" alt="Poppies — red poppies on slender green stems against a dusty rose ground, held against a pale wall" loading="lazy" />
+            <span class="size">11 &times; 14 in</span>
+          </a>
+          <figcaption>
+            <a class="t" href="print-poppies.html">Poppies</a>
+            <span class="price">$40</span>
+            <a class="buy" href="inquiries.html?piece=Poppies%20%28print%29">Email to purchase</a>
+          </figcaption>
+        </figure>
+        <figure class="card">
+          <a class="box" href="print-white-flowers.html">
+            <img src="images/white-flowers-held.jpg" alt="White Flowers — white cosmos scattered across a soft sage and olive ground, held against a pale wall" loading="lazy" />
+            <span class="size">11 &times; 14 in</span>
+          </a>
+          <figcaption>
+            <a class="t" href="print-white-flowers.html">White Flowers</a>
+            <span class="price">$40</span>
+            <a class="buy" href="inquiries.html?piece=White%20Flowers%20%28print%29">Email to purchase</a>
+          </figcaption>
+        </figure>
 
-    function showConfirmation() {
-      var msg = document.createElement("p");
-      msg.className = "confirmation";
-      msg.textContent = "Thank you — you’re on the list.";
-      form.replaceWith(msg);
-    }
+      </div>
+    </div>
+  </section>
 
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      formError.textContent = "";
+  <!-- ============ ABOUT ============ -->
+  <section class="about" id="about">
+    <div class="wrap">
+      <img src="images/shore.jpg" alt="Vivian Soderberg standing barefoot at the edge of the surf on an overcast beach, pale sky and wet sand" loading="lazy" width="1500" height="2000" />
+      <div>
+        <p class="first">
+          Places will always be a part of us, and our stories in some
+          intangible way.
+        </p>
+        <p>
+          I create simple, thoughtful artwork that gives you a sense of place
+          and an awareness of the places you've been.
+        </p>
+        <p>
+          Whether it's a nostalgic object made from reclaimed wood or a lonely
+          painting of the open sea rendered on linen canvas. My hope is that
+          these pieces will serve as a physical remembrance of time spent &amp;
+          a little piece of where you've been that you can take with you where
+          ever you may go.
+        </p>
+      </div>
+    </div>
+  </section>
 
-      if (!validate()) return;
+  <section class="inq" id="inquiries">
+    <div class="wrap">
+      <h2>Stay awhile</h2>
+      <p class="lead">A short note when new work is finished. A few times a year, nothing more.</p>
+      <a class="subscribe" href="https://viviansoderberg.substack.com/subscribe"
+         target="_blank" rel="noopener">Subscribe on Substack</a>
+      <p class="direct">
+        or email me directly at
+        <a href="mailto:viviansoderbergart@gmail.com">viviansoderbergart@gmail.com</a>
+      </p>
+    </div>
+  </section>
 
-      setPending(true);
+</main>
 
-      var data = new FormData(form);
+<footer>
+  <div class="wrap caps">
+    <span>Vivian's Place</span>
+    <a href="https://www.instagram.com/_viviansplace_/" target="_blank" rel="noopener">Instagram</a>
+    <span>&copy; 2026</span>
+  </div>
+</footer>
 
-      fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: data,
-      })
-        .then(function (response) {
-          return response.json().then(function (json) {
-            return { ok: response.ok, json: json };
-          });
-        })
-        .then(function (result) {
-          if (result.ok && result.json.success) {
-            showConfirmation();
-          } else {
-            throw new Error(
-              (result.json && result.json.message) || "Submission failed"
-            );
-          }
-        })
-        .catch(function () {
-          // Keep the entered values; just surface an inline error.
-          setPending(false);
-          formError.textContent =
-            "Something went wrong. Please try again in a moment.";
-        });
-    });
-  })();
-  </script>
+<script>
+(function(){
+  var btn=document.getElementById('showall'), more=document.getElementById('more');
+  if(!btn||!more) return;
+  btn.addEventListener('click',function(){
+    var open=more.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open);
+    btn.textContent=open?'Show less':'Show all';
+  });
+})();
+</script>
 </body>
 </html>
