@@ -128,11 +128,6 @@
     display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
     gap:clamp(22px,3.6vw,56px);
   }
-  /* a row of two would otherwise sit left with an empty third column */
-  .three.pair{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    max-width:880px;margin-left:auto;margin-right:auto;
-  }
   .card{margin:0;display:flex;flex-direction:column;text-align:center}
   .card .box{
     aspect-ratio:1;overflow:hidden;position:relative;display:block;
@@ -292,7 +287,7 @@
         href="inquiries.html?piece=..." with that URL. The label
         "Email to purchase" should then go back to "Add to cart".
       -->
-      <div class="three pair">
+      <div class="three">
 
         <figure class="card">
           <a class="box" href="the-valley-over.html">
@@ -315,6 +310,15 @@
           </figcaption>
         </figure>
 
+        <figure class="card">
+          <a class="box" href="going.html">
+            <img src="images/going.jpg" alt="Going — two geese in flight over a wide sand-coloured sky and dark shore" loading="lazy" />
+          </a>
+          <figcaption>
+            <a class="t" href="going.html">Going</a>
+            <span class="price"><span class="sold">Sold out</span></span>
+          </figcaption>
+        </figure>
       </div>
 
       <div class="three more" id="more">
@@ -333,15 +337,6 @@
           </a>
           <figcaption>
             <a class="t" href="somewhere-i-know.html">Somewhere I Know</a>
-            <span class="price"><span class="sold">Sold out</span></span>
-          </figcaption>
-        </figure>
-        <figure class="card">
-          <a class="box" href="going.html">
-            <img src="images/going.jpg" alt="Going — two geese in flight over a wide sand-coloured sky and dark shore" loading="lazy" />
-          </a>
-          <figcaption>
-            <a class="t" href="going.html">Going</a>
             <span class="price"><span class="sold">Sold out</span></span>
           </figcaption>
         </figure>
