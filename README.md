@@ -11,7 +11,7 @@ build step, no dependencies.
 | `index.html` | Homepage — header painting, originals, prints, about, Stay awhile |
 | `inquiries.html` | Commission / purchase form |
 | `the-valley-over.html`, `the-unknown.html` | The two available originals |
-| `once.html`, `memories-home.html`, `somewhere-i-know.html`, `going.html`, `one-summer.html`, `between-dreams.html`, `poppies-at-dusk.html`, `almost.html` | Sold originals |
+| `once.html`, `memories-home.html`, `somewhere-i-know.html`, `going.html`, `between-dreams.html`, `poppies-at-dusk.html`, `almost.html` | Sold originals |
 | `print-lilacs.html`, `print-poppies.html`, `print-white-flowers.html` | The three prints |
 | `images/` | All artwork and photography, 2000px on the long edge |
 | `favicon.svg` | Tab icon |

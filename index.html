@@ -174,6 +174,15 @@
     color:var(--ink-quiet);padding:12px 28px;border:1px solid var(--hair);
   }
 
+  /* ---------- objects: a single wide piece, shown uncropped ---------- */
+  .solo{max-width:900px;margin:0 auto}
+  .solo .card .box{aspect-ratio:auto}
+  .solo .card img{height:auto}
+  .card .medium{
+    display:block;font-style:italic;color:var(--ink-soft);
+    font-size:clamp(15px,1.2vw,17px);margin-bottom:10px;
+  }
+
   /* ---------- about ---------- */
   .more{display:none;margin-top:clamp(22px,3.6vw,56px)}
   .more.open{display:grid}
@@ -341,15 +350,6 @@
           </figcaption>
         </figure>
         <figure class="card">
-          <a class="box" href="one-summer.html">
-            <img src="images/one-summer.jpg" alt="One Summer — a golden ochre field beneath a heavy storm sky" loading="lazy" />
-          </a>
-          <figcaption>
-            <a class="t" href="one-summer.html">One Summer</a>
-            <span class="price"><span class="sold">Sold out</span></span>
-          </figcaption>
-        </figure>
-        <figure class="card">
           <a class="box" href="between-dreams.html">
             <img src="images/between-dreams.jpg" alt="Between Dreams — a misty marsh with pale water and grey-green trees" loading="lazy" />
           </a>
@@ -424,6 +424,28 @@
           </figcaption>
         </figure>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OBJECTS ============ -->
+  <section class="sec" id="objects">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Objects</h2>
+      </div>
+
+      <div class="solo">
+        <figure class="card">
+          <div class="box">
+            <img src="images/fishermans-village.jpg" alt="The Fisherman's Village — a row of small hand-painted houses made from weathered reclaimed wood, in soft greys, greens and natural grain" loading="lazy" width="1141" height="512" />
+          </div>
+          <figcaption>
+            <span class="t">The Fisherman's Village</span>
+            <span class="medium">Handpainted on reclaimed wood</span>
+            <span class="price"><span class="sold">Sold out</span></span>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
